@@ -298,7 +298,7 @@ class PersistentHTTP
           retry
         end
 
-      rescue IOError, EOFError, Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE => e
+      rescue IOError, EOFError, Errno::ECONNABORTED, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EPIPE => e
         due_to = "(due to #{e.message} - #{e.class})"
         message = error_message connection
         if retried or not (idempotent? req or @force_retry)
